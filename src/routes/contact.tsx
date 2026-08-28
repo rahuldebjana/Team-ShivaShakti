@@ -15,6 +15,7 @@ function ContactForm() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFields({ ...fields, [e.target.name]: e.target.value })
@@ -23,13 +24,19 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setError('')
     try {
-      await fetch('/contact-form.html', {
+      const response = await fetch('/contact-form.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({ 'form-name': 'contact', ...fields }),
+        body: encode({ 'form-name': 'contact', 'bot-field': '', ...fields }),
       })
+      if (!response.ok) {
+        throw new Error('Form submission failed')
+      }
       setSubmitted(true)
+    } catch {
+      setError('Sorry, we could not send your message. Please try again or email us directly at rahuldeb123jana@gmail.com.')
     } finally {
       setLoading(false)
     }
@@ -51,8 +58,20 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5" name="contact">
       <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden" aria-hidden="true">
+        <label>
+          Don&apos;t fill this out if you&apos;re human:
+          <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+
+      {error && (
+        <p className="text-sm rounded-lg px-4 py-3" style={{ background: '#FFF0F0', color: '#8B0000', border: '1px solid #E8A0A0' }} role="alert">
+          {error}
+        </p>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>

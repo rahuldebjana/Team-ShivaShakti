@@ -1,6 +1,10 @@
 [build]
   command = "vite build"
   publish = "dist/client"
+
+  [build.processing]
+    ignore_html_forms = false
+
 [dev]
   command = "npm run dev"
   targetPort = 3000

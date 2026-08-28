@@ -3,7 +3,8 @@
   <body>
     <!-- This file exists only so Netlify registers the form at build time. -->
     <!-- It is never shown to users. -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
