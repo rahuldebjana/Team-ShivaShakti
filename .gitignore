@@ -4,3 +4,4 @@ dist
 .tanstack
 .env
 *.local
+src/routeTree.gen.ts
