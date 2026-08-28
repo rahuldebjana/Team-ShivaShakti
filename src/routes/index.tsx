@@ -49,7 +49,7 @@ function HomePage() {
             className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
             style={{ color: '#FFFFFF', fontFamily: 'Georgia, serif' }}
           >
-            Beteswar Jhareswar
+            Beteswar Jhaareswar
             <span style={{ color: '#F0C040' }}> Shiva </span>
             Mandir
           </h1>
@@ -57,7 +57,7 @@ function HomePage() {
             className="text-xl md:text-2xl mb-2"
             style={{ color: '#E8D5B0', fontFamily: 'Georgia, serif' }}
           >
-            বেতেশ্বর ঝরেশ্বর শিব মন্দির
+            বেতেশ্বর ঝারেশ্বর শিব মন্দির
           </p>
           <p
             className="text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
@@ -129,7 +129,7 @@ function HomePage() {
                 A Temple of Faith & Tradition
               </h2>
               <p className="text-base leading-relaxed mb-4" style={{ color: '#5C3D11' }}>
-                Beteswar Jhareswar Shiva Mandir stands as a beacon of spirituality and devotion. Founded with the blessings of Lord Shiva, this sacred temple has served countless devotees on their path to moksha and divine grace.
+                Beteswar Jhaareswar Shiva Mandir stands as a beacon of spirituality and devotion. Founded with the blessings of Lord Shiva, this sacred temple has served countless devotees on their path to moksha and divine grace.
               </p>
               <p className="text-base leading-relaxed mb-6" style={{ color: '#5C3D11' }}>
                 Our temple follows age-old Vedic traditions and rituals, performing daily aartis, special poojas, and festivals that bring the community together in worship and celebration.
@@ -156,7 +156,7 @@ function HomePage() {
               <div className="text-center">
                 <div className="text-8xl mb-4" style={{ color: '#D4A017' }}>🛕</div>
                 <div className="text-2xl font-bold" style={{ color: '#F0C040', fontFamily: 'Georgia, serif' }}>
-                  Beteswar Jhareswar Shiva Mandir
+                  Beteswar Jhaareswar Shiva Mandir
                 </div>
                 <div className="text-sm mt-2" style={{ color: '#C4A882' }}>Est. in devotion to Lord Shiva</div>
               </div>
@@ -220,7 +220,7 @@ function HomePage() {
               80G Tax Exemption Available
             </h2>
             <p className="text-base mb-6 leading-relaxed" style={{ color: '#E8D5B0' }}>
-              All donations made to Beteswar Jhareswar Shiva Mandir are eligible for income tax deduction under Section 80G of the Income Tax Act, 1961. Your generosity supports the temple and provides you tax benefits.
+              All donations made to Beteswar Jhaareswar Shiva Mandir are eligible for income tax deduction under Section 80G of the Income Tax Act, 1961. Your generosity supports the temple and provides you tax benefits.
             </p>
             <Link
               to="/tax-benefit"

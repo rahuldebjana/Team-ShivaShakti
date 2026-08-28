@@ -43,7 +43,7 @@ function ContactForm() {
           Pranam! Your message has been received.
         </h3>
         <p className="text-base" style={{ color: '#5C3D11' }}>
-          Thank you for reaching out to Beteswar Jhareswar Shiva Mandir. Our team will respond within 24–48 hours. May Lord Shiva bless you abundantly.
+          Thank you for reaching out to Beteswar Jhaareswar Shiva Mandir. Our team will respond within 24–48 hours. May Lord Shiva bless you abundantly.
         </p>
         <div className="mt-6" style={{ color: '#D4A017', fontSize: '2rem', letterSpacing: '0.5rem' }}>ওঁ নমঃ শিবায়</div>
       </div>
@@ -193,7 +193,7 @@ function ContactPage() {
                   Temple Address
                 </h3>
                 <address className="not-italic text-base leading-relaxed" style={{ color: '#E8D5B0' }}>
-                  Beteswar Jhareswar Shiva Mandir<br />
+                  Beteswar Jhaareswar Shiva Mandir<br />
                   Beteswar, Damodarpur<br />
                   Ramnagar, Purba Medinipur<br />
                   PIN — 721446<br />
@@ -286,7 +286,7 @@ function ContactPage() {
             <div className="text-center">
               <div className="text-5xl mb-3">🗺️</div>
               <p className="text-base font-semibold" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
-                Beteswar Jhareswar Shiva Mandir
+                Beteswar Jhaareswar Shiva Mandir
               </p>
               <p className="text-sm mt-1" style={{ color: '#5C3D11' }}>
                 Beteswar, Damodarpur, Ramnagar, Purba Medinipur — PIN 721446

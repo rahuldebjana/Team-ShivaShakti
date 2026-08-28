@@ -5,7 +5,7 @@ export const Route = createFileRoute('/gallery')({
 })
 
 const galleryItems = [
-  { icon: '🔱', title: 'Shivalinga — Main Sanctum', category: 'Sanctum', bg: 'linear-gradient(135deg, #8B0000, #D4A017)', desc: 'The sacred Shivalinga enshrined in the main sanctum of Beteswar Jhareswar Shiva Mandir.' },
+  { icon: '🔱', title: 'Shivalinga — Main Sanctum', category: 'Sanctum', bg: 'linear-gradient(135deg, #8B0000, #D4A017)', desc: 'The sacred Shivalinga enshrined in the main sanctum of Beteswar Jhaareswar Shiva Mandir.' },
   { icon: '🪔', title: 'Morning Aarti', category: 'Rituals', bg: 'linear-gradient(135deg, #4A0E00, #FF8C38)', desc: 'Daily morning aarti performed at sunrise with Vedic chants.' },
   { icon: '🛕', title: 'Temple Gopuram', category: 'Architecture', bg: 'linear-gradient(135deg, #2D1B00, #8B0000)', desc: 'The grand entrance gopuram adorned with divine sculptures.' },
   { icon: '🌸', title: 'Maha Shivratri', category: 'Festivals', bg: 'linear-gradient(135deg, #8B0000, #5C1A00)', desc: 'Grand celebration of Maha Shivratri with devotees from across the region.' },
@@ -111,7 +111,7 @@ function GalleryPage() {
             Virtual Darshan
           </h2>
           <p className="text-base leading-relaxed mb-6" style={{ color: '#5C3D11' }}>
-            Unable to visit in person? Experience the divine presence of Beteswar Jhareswar Shiva Mandir through our virtual darshan. Watch live aarti, puja streams, and temple celebrations from wherever you are.
+            Unable to visit in person? Experience the divine presence of Beteswar Jhaareswar Shiva Mandir through our virtual darshan. Watch live aarti, puja streams, and temple celebrations from wherever you are.
           </p>
           <a
             href="https://beteswarshivamandir.netlify.app"

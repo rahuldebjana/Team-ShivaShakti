@@ -7,8 +7,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'Beteswar Jhareswar Shiva Mandir — Sacred Temple' },
-      { name: 'description', content: 'Beteswar Jhareswar Shiva Mandir — A sacred place of worship, devotion, and community. Registered under 80G for tax benefits.' },
+      { title: 'Beteswar Jhaareswar Shiva Mandir — Sacred Temple' },
+      { name: 'description', content: 'Beteswar Jhaareswar Shiva Mandir — A sacred place of worship, devotion, and community. Registered under 80G for tax benefits.' },
     ],
   }),
   shellComponent: RootDocument,
@@ -40,10 +40,10 @@ function Navbar() {
             <span className="om-glow text-2xl" style={{ color: '#D4A017' }}>ॐ</span>
             <div>
               <div className="text-white font-bold text-sm leading-tight tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
-                Beteswar Jhareswar Shiva Mandir
+                Beteswar Jhaareswar Shiva Mandir
               </div>
               <div className="text-xs leading-tight" style={{ color: '#F0C040' }}>
-                বেতেশ্বর ঝরেশ্বর শিব মন্দির
+                বেতেশ্বর ঝারেশ্বর শিব মন্দির
               </div>
             </div>
           </Link>
@@ -141,9 +141,9 @@ function Footer() {
               <span className="text-3xl" style={{ color: '#D4A017' }}>ॐ</span>
               <div>
                 <div className="font-bold text-lg" style={{ color: '#F0C040', fontFamily: 'Georgia, serif' }}>
-                  Beteswar Jhareswar Shiva Mandir
+                  Beteswar Jhaareswar Shiva Mandir
                 </div>
-                <div className="text-xs" style={{ color: '#D4A017' }}>বেতেশ্বর ঝরেশ্বর শিব মন্দির</div>
+                <div className="text-xs" style={{ color: '#D4A017' }}>বেতেশ্বর ঝারেশ্বর শিব মন্দির</div>
               </div>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: '#C4A882' }}>
@@ -192,7 +192,7 @@ function Footer() {
           style={{ borderTop: '1px solid rgba(212,160,23,0.3)', color: '#9A7A5A' }}
         >
           <div className="mb-1" style={{ color: '#D4A017', letterSpacing: '0.5rem' }}>🪷 ❋ 🪷</div>
-          © {new Date().getFullYear()} Beteswar Jhareswar Shiva Mandir. All rights reserved. &nbsp;|&nbsp; Registered under 80G
+          © {new Date().getFullYear()} Beteswar Jhaareswar Shiva Mandir. All rights reserved. &nbsp;|&nbsp; Registered under 80G
         </div>
       </div>
     </footer>

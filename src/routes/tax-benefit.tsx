@@ -40,7 +40,7 @@ function TaxBenefitPage() {
               Donations are Tax Exempt under Section 80G
             </h2>
             <p className="text-base leading-relaxed" style={{ color: '#5C3D11' }}>
-              Beteswar Jhareswar Shiva Mandir is a registered charitable trust recognized by the Income Tax Department of India. Donations made to the temple qualify for income tax deductions under <strong>Section 80G of the Income Tax Act, 1961</strong>.
+              Beteswar Jhaareswar Shiva Mandir is a registered charitable trust recognized by the Income Tax Department of India. Donations made to the temple qualify for income tax deductions under <strong>Section 80G of the Income Tax Act, 1961</strong>.
             </p>
           </div>
         </div>
@@ -76,7 +76,7 @@ function TaxBenefitPage() {
                 How Much Can You Save?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: '#5C3D11' }}>
-                Donations to Beteswar Jhareswar Shiva Mandir are eligible for a <strong>50% deduction</strong> of the donated amount from your total taxable income. For example, if you donate ₹10,000, you can claim a deduction of ₹5,000 from your taxable income.
+                Donations to Beteswar Jhaareswar Shiva Mandir are eligible for a <strong>50% deduction</strong> of the donated amount from your total taxable income. For example, if you donate ₹10,000, you can claim a deduction of ₹5,000 from your taxable income.
               </p>
             </div>
           </div>
@@ -95,7 +95,7 @@ function TaxBenefitPage() {
               {
                 step: '01',
                 title: 'Make a Donation',
-                desc: 'Donate by cash (up to ₹2,000 eligible), cheque, demand draft, UPI, or bank transfer to Beteswar Jhareswar Shiva Mandir.',
+                desc: 'Donate by cash (up to ₹2,000 eligible), cheque, demand draft, UPI, or bank transfer to Beteswar Jhaareswar Shiva Mandir.',
               },
               {
                 step: '02',
@@ -184,7 +184,7 @@ function TaxBenefitPage() {
                 🏛️ Bank Transfer / Cheque
               </h3>
               <div className="space-y-2 text-sm" style={{ color: '#E8D5B0' }}>
-                <div><span style={{ color: '#D4A017' }}>Account Name:</span> Beteswar Jhareswar Shiva Mandir Trust</div>
+                <div><span style={{ color: '#D4A017' }}>Account Name:</span> Beteswar Jhaareswar Shiva Mandir Trust</div>
                 <div><span style={{ color: '#D4A017' }}>Bank:</span> [Bank Name]</div>
                 <div><span style={{ color: '#D4A017' }}>Branch:</span> [Branch Name]</div>
                 <div><span style={{ color: '#D4A017' }}>Account No.:</span> [Account Number]</div>
@@ -224,7 +224,7 @@ function TaxBenefitPage() {
             className="p-6 rounded-xl text-sm"
             style={{ background: '#fff', border: '1px solid #E8D5B0', color: '#5C3D11' }}
           >
-            <strong style={{ color: '#8B0000' }}>Disclaimer:</strong> The information provided above is for general guidance only. Tax laws are subject to change. Please consult a qualified Chartered Accountant or Tax Advisor to understand the exact tax benefit applicable to your individual situation. Beteswar Jhareswar Shiva Mandir is not responsible for any tax-related decisions made solely on the basis of the information on this page.
+            <strong style={{ color: '#8B0000' }}>Disclaimer:</strong> The information provided above is for general guidance only. Tax laws are subject to change. Please consult a qualified Chartered Accountant or Tax Advisor to understand the exact tax benefit applicable to your individual situation. Beteswar Jhaareswar Shiva Mandir is not responsible for any tax-related decisions made solely on the basis of the information on this page.
           </div>
         </div>
       </section>

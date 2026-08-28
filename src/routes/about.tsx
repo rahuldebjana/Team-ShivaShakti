@@ -29,7 +29,7 @@ function PageHeader({ title, subtitle }: { title: string; subtitle?: string }) {
 function AboutPage() {
   return (
     <div>
-      <PageHeader title="About the Temple" subtitle="বেতেশ্বর ঝরেশ্বর শিব মন্দিরের পরিচয়" />
+      <PageHeader title="About the Temple" subtitle="বেতেশ্বর ঝারেশ্বর শিব মন্দিরের পরিচয়" />
 
       {/* Main About */}
       <section className="py-16 px-6">
@@ -37,20 +37,20 @@ function AboutPage() {
           <div className="text-center mb-12">
             <div className="text-6xl mb-4">🛕</div>
             <h2 className="text-3xl font-bold mb-4" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
-              Beteswar Jhareswar Shiva Mandir
+              Beteswar Jhaareswar Shiva Mandir
             </h2>
             <div className="lotus-divider">🪷 ❋ 🪷</div>
           </div>
 
           <div className="space-y-6 text-base leading-relaxed" style={{ color: '#5C3D11' }}>
             <p>
-              <strong style={{ color: '#8B0000' }}>Beteswar Jhareswar Shiva Mandir</strong> is a revered Hindu temple dedicated to Lord Shiva — the Supreme Being who is the destroyer of evil and the liberator of souls. Nestled in a serene and spiritually vibrant environment, this mandir has been a center of faith, culture, and community for countless devotees over the years.
+              <strong style={{ color: '#8B0000' }}>Beteswar Jhaareswar Shiva Mandir</strong> is a revered Hindu temple dedicated to Lord Shiva — the Supreme Being who is the destroyer of evil and the liberator of souls. Nestled in a serene and spiritually vibrant environment, this mandir has been a center of faith, culture, and community for countless devotees over the years.
             </p>
             <p>
               The temple enshrines a magnificent Shivalinga, the sacred symbol of Lord Shiva, around which all rituals and devotions are performed. The sacred atmosphere, the sound of temple bells, the fragrance of incense, and the chanting of Vedic mantras create an experience of profound peace and divine connection for all who visit.
             </p>
             <p>
-              Governed by a dedicated trust, Beteswar Jhareswar Shiva Mandir remains committed to preserving ancient Vedic traditions while serving the spiritual and social needs of the community. The temple is registered as a charitable trust and is recognized under Section 80G of the Income Tax Act, 1961, enabling donors to claim tax exemptions on their generous contributions.
+              Governed by a dedicated trust, Beteswar Jhaareswar Shiva Mandir remains committed to preserving ancient Vedic traditions while serving the spiritual and social needs of the community. The temple is registered as a charitable trust and is recognized under Section 80G of the Income Tax Act, 1961, enabling donors to claim tax exemptions on their generous contributions.
             </p>
           </div>
         </div>
@@ -138,7 +138,7 @@ function AboutPage() {
               },
               {
                 title: 'Shivratri Celebration',
-                desc: 'Maha Shivratri is the grandest festival at Beteswar Jhareswar Shiva Mandir, celebrated with 24-hour vigil, abhishek, bhajans, and mass community feast (prasad distribution).',
+                desc: 'Maha Shivratri is the grandest festival at Beteswar Jhaareswar Shiva Mandir, celebrated with 24-hour vigil, abhishek, bhajans, and mass community feast (prasad distribution).',
               },
               {
                 title: 'Community Service (Seva)',
@@ -178,7 +178,7 @@ function AboutPage() {
               Registered Charitable Trust
             </h2>
             <p className="leading-relaxed" style={{ color: '#E8D5B0' }}>
-              Beteswar Jhareswar Shiva Mandir operates as a registered charitable trust under applicable Indian laws. Donations to the temple are exempt from income tax under Section 80G of the Income Tax Act, 1961. We maintain complete transparency in all financial activities and welcome devotees to be a part of this sacred service.
+              Beteswar Jhaareswar Shiva Mandir operates as a registered charitable trust under applicable Indian laws. Donations to the temple are exempt from income tax under Section 80G of the Income Tax Act, 1961. We maintain complete transparency in all financial activities and welcome devotees to be a part of this sacred service.
             </p>
           </div>
         </div>
