@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
+import { templeDirectionsUrl, templeLocation, templeMapsUrl, templeOsmEmbedUrl } from '@/data/location'
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -288,37 +289,54 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* Map placeholder */}
+      {/* Map */}
       <section className="pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-6" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
             📍 Find Us on the Map
           </h2>
           <div
-            className="w-full rounded-2xl flex items-center justify-center"
-            style={{
-              background: 'linear-gradient(135deg, #F5E6D3, #E8D5B0)',
-              height: 300,
-              border: '2px solid #D4A017',
-            }}
+            className="w-full rounded-2xl overflow-hidden"
+            style={{ border: '2px solid #D4A017', boxShadow: '0 8px 30px rgba(139,0,0,0.1)' }}
           >
-            <div className="text-center">
-              <div className="text-5xl mb-3">🗺️</div>
-              <p className="text-base font-semibold" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
-                Beteswar Jhaareswar Shiva Mandir
+            <iframe
+              title="Beteswar Jhaareswar Shiva Mandir location map"
+              src={templeOsmEmbedUrl}
+              className="w-full border-0"
+              style={{ height: 360 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="p-6 text-center" style={{ background: 'linear-gradient(135deg, #F5E6D3, #E8D5B0)' }}>
+              <p className="text-base font-semibold mb-1" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
+                {templeLocation.label}
               </p>
-              <p className="text-sm mt-1" style={{ color: '#5C3D11' }}>
-                Beteswar, Damodarpur, Ramnagar, Purba Medinipur — PIN 721446
+              <p className="text-sm mb-2" style={{ color: '#5C3D11' }}>
+                {templeLocation.address}
               </p>
-              <a
-                href="https://maps.google.com/?q=Beteswar+Damodarpur+Ramnagar+Purba+Medinipur+721446"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 px-5 py-2 rounded text-sm font-semibold no-underline"
-                style={{ background: '#8B0000', color: '#F0C040', fontFamily: 'Georgia, serif' }}
-              >
-                Open in Google Maps →
-              </a>
+              <p className="text-sm font-medium mb-4" style={{ color: '#8B0000' }}>
+                GPS: {templeLocation.latitude}° N, {templeLocation.longitude}° E
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href={templeMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2 rounded text-sm font-semibold no-underline"
+                  style={{ background: '#8B0000', color: '#F0C040', fontFamily: 'Georgia, serif' }}
+                >
+                  Open in Google Maps →
+                </a>
+                <a
+                  href={templeDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2 rounded text-sm font-semibold no-underline"
+                  style={{ background: '#fff', color: '#8B0000', border: '1px solid #D4A017', fontFamily: 'Georgia, serif' }}
+                >
+                  Get Directions →
+                </a>
+              </div>
             </div>
           </div>
         </div>
