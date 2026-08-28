@@ -205,7 +205,7 @@ function ContactPage() {
               <div className="space-y-4">
                 {[
                   { icon: '📞', label: 'Phone', value: '+91 XXXXX XXXXX', href: 'tel:+91XXXXXXXXXX' },
-                  { icon: '📧', label: 'Email', value: 'beteswarshivamandir@gmail.com', href: 'mailto:beteswarshivamandir@gmail.com' },
+                  { icon: '📧', label: 'Email', value: 'rahuldeb123jana@gmail.com', href: 'mailto:rahuldeb123jana@gmail.com' },
                   { icon: '🌐', label: 'Website', value: 'beteswarshivamandir.netlify.app', href: '#' },
                 ].map((contact) => (
                   <a

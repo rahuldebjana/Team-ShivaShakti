@@ -130,7 +130,7 @@ function GalleryPage() {
             Want to share your photos from the temple? Send us your pictures and we'll feature them in our gallery.
           </p>
           <a
-            href="mailto:beteswarshivamandir@gmail.com"
+            href="mailto:rahuldeb123jana@gmail.com"
             className="text-sm font-semibold no-underline"
             style={{ color: '#8B0000' }}
           >
