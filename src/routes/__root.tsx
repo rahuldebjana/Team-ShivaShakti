@@ -43,7 +43,7 @@ function Navbar() {
                 Beteswar Jhareswar Shiva Mandir
               </div>
               <div className="text-xs leading-tight" style={{ color: '#F0C040' }}>
-                बेतेश्वर झरेश्वर शिव मंदिर
+                বেতেশ্বর ঝরেশ্বর শিব মন্দির
               </div>
             </div>
           </Link>
@@ -143,7 +143,7 @@ function Footer() {
                 <div className="font-bold text-lg" style={{ color: '#F0C040', fontFamily: 'Georgia, serif' }}>
                   Beteswar Jhareswar Shiva Mandir
                 </div>
-                <div className="text-xs" style={{ color: '#D4A017' }}>बेतेश्वर झरेश्वर शिव मंदिर</div>
+                <div className="text-xs" style={{ color: '#D4A017' }}>বেতেশ্বর ঝরেশ্বর শিব মন্দির</div>
               </div>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: '#C4A882' }}>

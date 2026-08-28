@@ -43,7 +43,7 @@ function HomePage() {
             className="text-lg mb-3 tracking-widest"
             style={{ color: '#F0C040', fontFamily: 'Georgia, serif', letterSpacing: '0.3em' }}
           >
-            ॐ नमः शिवाय
+            ওঁ নমঃ শিবায়
           </div>
           <h1
             className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
@@ -57,7 +57,7 @@ function HomePage() {
             className="text-xl md:text-2xl mb-2"
             style={{ color: '#E8D5B0', fontFamily: 'Georgia, serif' }}
           >
-            बेतेश्वर झरेश्वर शिव मंदिर
+            বেতেশ্বর ঝরেশ্বর শিব মন্দির
           </p>
           <p
             className="text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed"

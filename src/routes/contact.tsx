@@ -45,7 +45,7 @@ function ContactForm() {
         <p className="text-base" style={{ color: '#5C3D11' }}>
           Thank you for reaching out to Beteswar Jhareswar Shiva Mandir. Our team will respond within 24–48 hours. May Lord Shiva bless you abundantly.
         </p>
-        <div className="mt-6" style={{ color: '#D4A017', fontSize: '2rem', letterSpacing: '0.5rem' }}>ॐ नमः शिवाय</div>
+        <div className="mt-6" style={{ color: '#D4A017', fontSize: '2rem', letterSpacing: '0.5rem' }}>ওঁ নমঃ শিবায়</div>
       </div>
     )
   }

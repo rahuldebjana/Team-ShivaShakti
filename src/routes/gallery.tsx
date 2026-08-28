@@ -37,7 +37,7 @@ function GalleryPage() {
           Temple Gallery
         </h1>
         <p className="text-lg" style={{ color: '#C4A882', fontFamily: 'Georgia, serif' }}>
-          Glimpses of the Sacred — दिव्य दृश्य
+          Glimpses of the Sacred — দিব্য দৃশ্য
         </p>
       </section>
 
