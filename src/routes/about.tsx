@@ -29,7 +29,7 @@ function PageHeader({ title, subtitle }: { title: string; subtitle?: string }) {
 function AboutPage() {
   return (
     <div>
-      <PageHeader title="About the Temple" subtitle="বেতেশ্বর ঝারেশ্বর শিব মন্দিরের পরিচয়" />
+      <PageHeader title="About the Temple" subtitle="বেতেশ্বর ঝাড়েশ্বর শিব মন্দিরের পরিচয়" />
 
       {/* Main About */}
       <section className="py-16 px-6">

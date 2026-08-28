@@ -57,7 +57,7 @@ function HomePage() {
             className="text-xl md:text-2xl mb-2"
             style={{ color: '#E8D5B0', fontFamily: 'Georgia, serif' }}
           >
-            বেতেশ্বর ঝারেশ্বর শিব মন্দির
+            বেতেশ্বর ঝাড়েশ্বর শিব মন্দির
           </p>
           <p
             className="text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
