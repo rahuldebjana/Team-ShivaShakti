@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { templeDirectionsUrl, templeLocation, templeMapsUrl, templeOsmEmbedUrl } from '@/data/location'
+import { templeDirectionsUrl, templeLocation, templeMapEmbedUrl, templeMapsUrl } from '@/data/location'
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -214,7 +214,7 @@ function ContactPage() {
                 </h3>
                 <address className="not-italic text-base leading-relaxed" style={{ color: '#E8D5B0' }}>
                   Beteswar Jhaareswar Shiva Mandir<br />
-                  Beteswar, Damodarpur<br />
+                  Balakbar - Beteswar Rd, Sadi<br />
                   Ramnagar, Purba Medinipur<br />
                   PIN — 721446<br />
                   India
@@ -301,10 +301,11 @@ function ContactPage() {
           >
             <iframe
               title="Beteswar Jhaareswar Shiva Mandir location map"
-              src={templeOsmEmbedUrl}
+              src={templeMapEmbedUrl}
               className="w-full border-0"
               style={{ height: 360 }}
               loading="lazy"
+              allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
             />
             <div className="p-6 text-center" style={{ background: 'linear-gradient(135deg, #F5E6D3, #E8D5B0)' }}>
@@ -315,7 +316,7 @@ function ContactPage() {
                 {templeLocation.address}
               </p>
               <p className="text-sm font-medium mb-4" style={{ color: '#8B0000' }}>
-                GPS: {templeLocation.latitude}° N, {templeLocation.longitude}° E
+                Google Plus Code: {templeLocation.plusCode}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a

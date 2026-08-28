@@ -1,13 +1,15 @@
-/** Temple GPS — Damodarpur Paschim, Ramnagar, Purba Medinipur (PIN 721446) */
+/** Temple location — from official Google Maps pin */
+export const templeGoogleMapsUrl = 'https://maps.app.goo.gl/eZ6ExHFR7qRyVTM5A?g_st=ic'
+
 export const templeLocation = {
-  latitude: 21.7027,
-  longitude: 87.5201,
   label: 'Beteswar Jhaareswar Shiva Mandir',
-  address: 'Beteswar, Damodarpur, Ramnagar, Purba Medinipur, West Bengal — PIN 721446',
+  address: 'Beteswar Temple, Balakbar - Beteswar Rd, Sadi, West Bengal — PIN 721446',
+  plusCode: 'PG26 G4R',
+  mapsQuery: 'PG26 G4R Beteswar Temple, Balakbar - Beteswar Rd, Sadi, West Bengal 721446',
 } as const
 
-export const templeMapsUrl = `https://www.google.com/maps/search/?api=1&query=${templeLocation.latitude},${templeLocation.longitude}`
+export const templeMapsUrl = templeGoogleMapsUrl
 
-export const templeDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${templeLocation.latitude},${templeLocation.longitude}`
+export const templeDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(templeLocation.mapsQuery)}`
 
-export const templeOsmEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${templeLocation.longitude - 0.02}%2C${templeLocation.latitude - 0.015}%2C${templeLocation.longitude + 0.02}%2C${templeLocation.latitude + 0.015}&layer=mapnik&marker=${templeLocation.latitude}%2C${templeLocation.longitude}`
+export const templeMapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(templeLocation.mapsQuery)}&output=embed&z=17`
