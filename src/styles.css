@@ -1,0 +1,98 @@
+@import "tailwindcss" source("../");
+
+:root {
+  --saffron: #FF6B00;
+  --saffron-light: #FF8C38;
+  --gold: #D4A017;
+  --gold-light: #F0C040;
+  --maroon: #8B0000;
+  --cream: #FFF8F0;
+  --cream-dark: #F5E6D3;
+  --brown-dark: #2D1B00;
+  --brown-mid: #5C3D11;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--cream);
+  color: var(--brown-dark);
+}
+
+/* Om symbol animation */
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(212, 160, 23, 0.5); }
+  50% { text-shadow: 0 0 25px rgba(212, 160, 23, 1), 0 0 50px rgba(255, 107, 0, 0.4); }
+}
+
+.om-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Decorative divider */
+.divider-om {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.divider-om::before,
+.divider-om::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* Temple pattern border */
+.temple-border {
+  border-top: 3px solid var(--saffron);
+  border-bottom: 3px solid var(--saffron);
+  position: relative;
+}
+
+/* Smooth nav scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Gallery grid */
+.gallery-img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(139, 0, 0, 0.25);
+}
+
+/* Form inputs */
+.temple-input {
+  border: 1.5px solid var(--gold);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  background: #fffaf4;
+  color: var(--brown-dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.temple-input:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+}
+
+/* Lotus decoration */
+.lotus-divider {
+  text-align: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+  margin: 0.5rem 0;
+}
