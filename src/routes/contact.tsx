@@ -6,10 +6,43 @@ export const Route = createFileRoute('/contact')({
   component: ContactPage,
 })
 
+const SUBJECT_OPTIONS = [
+  { value: 'General Enquiry', label: 'General Enquiry' },
+  { value: 'Donation / 80G', label: 'Donation / 80G Enquiry' },
+  { value: 'Puja Booking', label: 'Puja / Ceremony Booking' },
+  { value: 'Event', label: 'Upcoming Events' },
+  { value: 'Feedback', label: 'Feedback / Suggestions' },
+  { value: 'Other', label: 'Other' },
+] as const
+
+const SUBJECT_VALUES = SUBJECT_OPTIONS.map((option) => option.value)
+
+const FIELD_LIMITS = {
+  name: 100,
+  email: 254,
+  phone: 20,
+  subject: 50,
+  message: 2000,
+} as const
+
 function encode(data: Record<string, string>) {
   return Object.entries(data)
     .map(([key, val]) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`)
     .join('&')
+}
+
+function validateFields(fields: { name: string; email: string; phone: string; subject: string; message: string }): string | null {
+  if (!fields.name.trim()) return 'Please enter your name.'
+  if (fields.name.length > FIELD_LIMITS.name) return `Name must be ${FIELD_LIMITS.name} characters or fewer.`
+  if (!fields.email.trim()) return 'Please enter your email address.'
+  if (fields.email.length > FIELD_LIMITS.email) return `Email must be ${FIELD_LIMITS.email} characters or fewer.`
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return 'Please enter a valid email address.'
+  if (fields.phone.length > FIELD_LIMITS.phone) return `Phone must be ${FIELD_LIMITS.phone} characters or fewer.`
+  if (!fields.subject) return 'Please select a subject.'
+  if (!SUBJECT_VALUES.includes(fields.subject as (typeof SUBJECT_VALUES)[number])) return 'Please select a valid subject.'
+  if (!fields.message.trim()) return 'Please enter a message.'
+  if (fields.message.length > FIELD_LIMITS.message) return `Message must be ${FIELD_LIMITS.message} characters or fewer.`
+  return null
 }
 
 function ContactForm() {
@@ -26,6 +59,14 @@ function ContactForm() {
     e.preventDefault()
     setLoading(true)
     setError('')
+
+    const validationError = validateFields(fields)
+    if (validationError) {
+      setError(validationError)
+      setLoading(false)
+      return
+    }
+
     try {
       const response = await fetch('/contact-form.html', {
         method: 'POST',
@@ -85,6 +126,7 @@ function ContactForm() {
             value={fields.name}
             onChange={handleChange}
             required
+            maxLength={FIELD_LIMITS.name}
             placeholder="Your full name"
             className="temple-input"
           />
@@ -99,6 +141,7 @@ function ContactForm() {
             value={fields.email}
             onChange={handleChange}
             required
+            maxLength={FIELD_LIMITS.email}
             placeholder="your@email.com"
             className="temple-input"
           />
@@ -115,6 +158,7 @@ function ContactForm() {
             name="phone"
             value={fields.phone}
             onChange={handleChange}
+            maxLength={FIELD_LIMITS.phone}
             placeholder="+91 XXXXX XXXXX"
             className="temple-input"
           />
@@ -131,12 +175,9 @@ function ContactForm() {
             className="temple-input"
           >
             <option value="">Select a subject</option>
-            <option value="General Enquiry">General Enquiry</option>
-            <option value="Donation / 80G">Donation / 80G Enquiry</option>
-            <option value="Puja Booking">Puja / Ceremony Booking</option>
-            <option value="Event">Upcoming Events</option>
-            <option value="Feedback">Feedback / Suggestions</option>
-            <option value="Other">Other</option>
+            {SUBJECT_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -150,6 +191,7 @@ function ContactForm() {
           value={fields.message}
           onChange={handleChange}
           required
+          maxLength={FIELD_LIMITS.message}
           rows={5}
           placeholder="Write your message here..."
           className="temple-input resize-none"
