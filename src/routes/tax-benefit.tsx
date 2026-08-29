@@ -95,7 +95,7 @@ function TaxBenefitPage() {
               {
                 step: '01',
                 title: 'Make a Donation',
-                desc: 'Donate by cash (up to ₹2,000 eligible), cheque, demand draft, UPI, or bank transfer to Beteswar Jhaareswar Shiva Mandir.',
+                desc: 'Scan the trust UPI QR code on this page, or donate by cheque, demand draft, or bank transfer to Sree Sree Beteswar Jhareswar. Cash donations up to ₹2,000 are also accepted.',
               },
               {
                 step: '02',
@@ -168,11 +168,77 @@ function TaxBenefitPage() {
         </div>
       </section>
 
-      {/* Donation Ways */}
+      {/* Sacred Donation */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="text-4xl mb-3 om-glow" style={{ color: '#D4A017' }}>ॐ</div>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
+              Offer Your Seva with Devotion
+            </h2>
+            <p className="text-base leading-relaxed max-w-2xl mx-auto italic" style={{ color: '#5C3D11', fontFamily: 'Georgia, serif' }}>
+              &ldquo;दानं परमं धर्मः&rdquo; — Charity is the highest virtue. Every offering you make to Sree Sree Beteswar Jhareswar flows into the service of Lord Shiva — sustaining the mandir, the daily puja, and the sacred traditions that bless our community.
+            </p>
+          </div>
+
+          <div
+            className="rounded-2xl p-8 md:p-10 text-center"
+            style={{
+              background: 'linear-gradient(135deg, #FFF8F0, #F5E6D3)',
+              border: '3px solid #D4A017',
+              boxShadow: '0 20px 60px rgba(139,0,0,0.12)',
+            }}
+          >
+            <p className="text-sm uppercase tracking-widest mb-2" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
+              Scan &amp; Pay — Trust Account
+            </p>
+            <h3 className="text-xl font-bold mb-2" style={{ color: '#2D1B00', fontFamily: 'Georgia, serif' }}>
+              Sree Sree Beteswar Jhareswar
+            </h3>
+            <p className="text-sm mb-6" style={{ color: '#5C3D11' }}>
+              State Bank of India &nbsp;·&nbsp; Your donation is eligible for 80G tax exemption
+            </p>
+
+            <div
+              className="inline-block p-4 rounded-2xl mb-6"
+              style={{ background: '#fff', border: '2px solid #E8D5B0', boxShadow: '0 8px 32px rgba(0,0,0,0.08)' }}
+            >
+              <img
+                src="/donation/upi-qr-sbi.jpg"
+                alt="SBI UPI QR code for Sree Sree Beteswar Jhareswar trust donations — scan to pay via GPay, Paytm, PhonePe, or any UPI app"
+                className="w-64 h-auto max-w-full rounded-lg"
+                width={256}
+                height={320}
+                loading="lazy"
+              />
+            </div>
+
+            <div
+              className="inline-block px-6 py-3 rounded-xl mb-4"
+              style={{ background: 'linear-gradient(135deg, #8B0000, #4A0E00)', border: '1px solid #D4A017' }}
+            >
+              <span className="text-sm" style={{ color: '#D4A017' }}>UPI ID: </span>
+              <span className="font-bold text-lg select-all" style={{ color: '#FFFFFF', fontFamily: 'monospace' }}>
+                9733856381bj@sbi
+              </span>
+            </div>
+
+            <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: '#5C3D11' }}>
+              Scan the QR code with GPay, Paytm, PhonePe, BHIM, yono SBI, or any UPI app. After donating, please contact our office with your name and PAN to receive your official 80G receipt.
+            </p>
+          </div>
+
+          <p className="text-center mt-8 text-sm italic" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
+            May your generous offering bring you the grace of Mahadev and the peace of a heart devoted to dharma. 🙏
+          </p>
+        </div>
+      </section>
+
+      {/* Donation Ways */}
+      <section className="py-16 px-6" style={{ background: '#F5E6D3' }}>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-10" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
-            How to Donate
+            Other Ways to Donate
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -184,11 +250,12 @@ function TaxBenefitPage() {
                 🏛️ Bank Transfer / Cheque
               </h3>
               <div className="space-y-2 text-sm" style={{ color: '#E8D5B0' }}>
-                <div><span style={{ color: '#D4A017' }}>Account Name:</span> Beteswar Jhaareswar Shiva Mandir Trust</div>
-                <div><span style={{ color: '#D4A017' }}>Bank:</span> [Bank Name]</div>
-                <div><span style={{ color: '#D4A017' }}>Branch:</span> [Branch Name]</div>
-                <div><span style={{ color: '#D4A017' }}>Account No.:</span> [Account Number]</div>
-                <div><span style={{ color: '#D4A017' }}>IFSC Code:</span> [IFSC Code]</div>
+                <div><span style={{ color: '#D4A017' }}>Account Name:</span> Sree Sree Beteswar Jhareswar</div>
+                <div><span style={{ color: '#D4A017' }}>Bank:</span> State Bank of India (SBI)</div>
+                <div><span style={{ color: '#D4A017' }}>UPI ID:</span> 9733856381bj@sbi</div>
+                <p className="pt-2 text-xs" style={{ color: '#C4A882' }}>
+                  For cheque, NEFT, or RTGS details, please contact the temple office.
+                </p>
               </div>
             </div>
 
@@ -197,20 +264,12 @@ function TaxBenefitPage() {
               style={{ background: 'linear-gradient(135deg, #4A0E00, #2D1B00)', border: '2px solid #D4A017' }}
             >
               <h3 className="font-bold text-xl mb-4" style={{ color: '#F0C040', fontFamily: 'Georgia, serif' }}>
-                📱 UPI / Online Payment
+                📋 After You Donate
               </h3>
-              <div className="space-y-3 text-sm" style={{ color: '#E8D5B0' }}>
-                <p>Scan the QR code or use our UPI ID to donate instantly through any UPI app (GPay, PhonePe, Paytm, etc.)</p>
-                <div
-                  className="w-32 h-32 mx-auto rounded-xl flex items-center justify-center"
-                  style={{ background: '#fff' }}
-                >
-                  <div className="text-center">
-                    <div className="text-4xl">📱</div>
-                    <div className="text-xs" style={{ color: '#8B0000' }}>UPI QR Code</div>
-                  </div>
-                </div>
-                <div className="text-center"><span style={{ color: '#D4A017' }}>UPI ID:</span> beteswarshiva@upi</div>
+              <div className="space-y-3 text-sm leading-relaxed" style={{ color: '#E8D5B0' }}>
+                <p>Share your name, mobile number, and PAN with our office so we can issue your official donation receipt with 80G registration details.</p>
+                <p>Keep the receipt safe — you will need it when filing your Income Tax Return to claim your deduction under Section 80G.</p>
+                <p style={{ color: '#D4A017' }}>हर दान शिव की कृपा का मार्ग है। 🙏</p>
               </div>
             </div>
           </div>
