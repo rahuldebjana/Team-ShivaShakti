@@ -213,18 +213,8 @@ function TaxBenefitPage() {
               />
             </div>
 
-            <div
-              className="inline-block px-6 py-3 rounded-xl mb-4"
-              style={{ background: 'linear-gradient(135deg, #8B0000, #4A0E00)', border: '1px solid #D4A017' }}
-            >
-              <span className="text-sm" style={{ color: '#D4A017' }}>UPI ID: </span>
-              <span className="font-bold text-lg select-all" style={{ color: '#FFFFFF', fontFamily: 'monospace' }}>
-                9733856381bj@sbi
-              </span>
-            </div>
-
             <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: '#5C3D11' }}>
-              Scan the QR code with GPay, Paytm, PhonePe, BHIM, yono SBI, or any UPI app. After donating, please contact our office with your name and PAN to receive your official 80G receipt.
+              Scan the QR code with GPay, Paytm, PhonePe, BHIM, yono SBI, or any UPI app. The UPI ID is printed below the QR code on the poster. After donating, please contact our office with your name and PAN to receive your official 80G receipt.
             </p>
           </div>
 
@@ -252,7 +242,7 @@ function TaxBenefitPage() {
               <div className="space-y-2 text-sm" style={{ color: '#E8D5B0' }}>
                 <div><span style={{ color: '#D4A017' }}>Account Name:</span> Sree Sree Beteswar Jhareswar</div>
                 <div><span style={{ color: '#D4A017' }}>Bank:</span> State Bank of India (SBI)</div>
-                <div><span style={{ color: '#D4A017' }}>UPI ID:</span> 9733856381bj@sbi</div>
+                <div><span style={{ color: '#D4A017' }}>UPI:</span> Scan the QR code above</div>
                 <p className="pt-2 text-xs" style={{ color: '#C4A882' }}>
                   For cheque, NEFT, or RTGS details, please contact the temple office.
                 </p>
