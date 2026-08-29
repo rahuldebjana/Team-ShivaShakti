@@ -24,8 +24,18 @@ jobs:
       - name: Install and build
         run: npm ci && npm run build
 
+      - name: Verify Netlify secrets
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "::error::Add NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID to GitHub repository secrets, or trigger a deploy from the Netlify dashboard."
+            exit 1
+          fi
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
       - name: Deploy to Netlify
-        run: npx netlify-cli@17.31.0 deploy --prod
+        run: npx netlify-cli@17.31.0 deploy --prod --auth "$NETLIFY_AUTH_TOKEN" --site "$NETLIFY_SITE_ID"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
