@@ -1,5 +1,7 @@
 type LlmMessage = { role: 'system' | 'user' | 'assistant'; content: string }
 
+import { getGroqApiKey, getHfToken } from '@/server/env'
+
 type ChatHistoryMessage = { role: 'user' | 'assistant'; content: string }
 
 async function callOpenAiCompatibleApi(
@@ -48,7 +50,7 @@ async function callGroq(messages: LlmMessage[]): Promise<string> {
   return callOpenAiCompatibleApi(
     'https://api.groq.com/openai/v1/chat/completions',
     apiKey,
-    'llama-3.1-8b-instant',
+    'openai/gpt-oss-20b',
     messages,
   )
 }
