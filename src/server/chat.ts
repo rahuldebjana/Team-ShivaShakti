@@ -1,8 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import { TEMPLE_SYSTEM_PROMPT } from '@/data/temple-knowledge'
-
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
-const GROQ_MODEL = 'llama-3.1-8b-instant'
+import { generateChatReply } from '@/server/llm'
 
 const MAX_MESSAGE_LENGTH = 500
 const MAX_HISTORY_MESSAGES = 10
@@ -60,48 +58,15 @@ function validateChatInput(data: unknown): ChatInput {
 export const sendChatMessage = createServerFn({ method: 'POST' })
   .validator(validateChatInput)
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY
+    const hasGroq = Boolean(process.env.GROQ_API_KEY)
+    const hasHf = Boolean(process.env.HF_TOKEN)
 
-    if (!apiKey) {
+    if (!hasGroq && !hasHf) {
       throw new Error(
         'The temple assistant is not configured yet. Please contact the temple directly via the Contact page.',
       )
     }
 
-    const messages = [
-      { role: 'system' as const, content: TEMPLE_SYSTEM_PROMPT },
-      ...data.history.map((m) => ({ role: m.role, content: m.content })),
-      { role: 'user' as const, content: data.message },
-    ]
-
-    const response = await fetch(GROQ_API_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: GROQ_MODEL,
-        messages,
-        max_tokens: 512,
-        temperature: 0.7,
-      }),
-    })
-
-    if (!response.ok) {
-      const errorBody = await response.text().catch(() => '')
-      console.error('Groq API error:', response.status, errorBody)
-      throw new Error('The assistant is temporarily unavailable. Please try again later or use the Contact page.')
-    }
-
-    const result = (await response.json()) as {
-      choices?: Array<{ message?: { content?: string } }>
-    }
-
-    const reply = result.choices?.[0]?.message?.content?.trim()
-    if (!reply) {
-      throw new Error('No response received. Please try again.')
-    }
-
+    const reply = await generateChatReply(TEMPLE_SYSTEM_PROMPT, data.history, data.message)
     return { reply }
   })

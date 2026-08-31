@@ -28,12 +28,30 @@ A floating **Temple Assistant** chatbot (bottom-right on every page) powered by 
 
 ### Setup (required for production)
 
-1. Create a free API key at [console.groq.com](https://console.groq.com/)
-2. In the Netlify dashboard → **Site settings → Environment variables**, add:
-   - `GROQ_API_KEY` = your Groq API key
-3. Redeploy the site
+Use **either** provider below (Hugging Face is often easier to sign up for):
 
-Without `GROQ_API_KEY`, the chat UI appears but requests return a friendly configuration message.
+#### Option A — Hugging Face (recommended if Groq login fails)
+
+1. Sign up at [huggingface.co](https://huggingface.co/) (GitHub or Google login works reliably)
+2. Go to [Settings → Access Tokens](https://huggingface.co/settings/tokens) → **Create new token**
+3. Choose **Fine-grained**, enable **"Make calls to Inference Providers"**
+4. In Netlify → **Site settings → Environment variables**, add:
+   - `HF_TOKEN` = your Hugging Face token (starts with `hf_`)
+5. Redeploy the site
+
+Uses **Llama 3.1 8B** (open-source) via Hugging Face's free inference credits.
+
+#### Option B — Groq
+
+1. Sign up at [console.groq.com](https://console.groq.com/) — use **GitHub/Google** sign-in (not email magic links on mobile)
+2. If you see "login link expired", request a **fresh link** and open it only once in Chrome/Safari (not WhatsApp/Telegram in-app browser)
+3. In Netlify → **Site settings → Environment variables**, add:
+   - `GROQ_API_KEY` = your Groq API key
+4. Redeploy the site
+
+If both `HF_TOKEN` and `GROQ_API_KEY` are set, Groq is tried first, then Hugging Face as fallback.
+
+Without either key, the chat UI appears but requests return a friendly configuration message.
 
 ## Running Locally
 
