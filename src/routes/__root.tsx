@@ -1,5 +1,6 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 import { useState } from 'react'
+import { ChatBot } from '@/components/ChatBot'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -211,6 +212,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <Outlet />
         </main>
         <Footer />
+        <ChatBot />
         <Scripts />
       </body>
     </html>

@@ -20,6 +20,21 @@ A beautifully designed, production-grade website for **Beteswar Shiva Mandir** (
 | `/tax-benefit` | 80G Income Tax exemption details and how-to guide |
 | `/contact` | Contact form, temple address, hours, social links |
 
+A floating **Temple Assistant** chatbot is available on all pages (powered by Llama 3.1 via Groq). Set `GROQ_API_KEY` in Netlify environment variables for production.
+
+## Temple Chatbot
+
+A floating **Temple Assistant** chatbot (bottom-right on every page) powered by [Llama 3.1 8B](https://llama.meta.com/) via the free [Groq](https://groq.com/) API. It answers questions about temple timings, rituals, 80G donations, and directions using a curated knowledge base.
+
+### Setup (required for production)
+
+1. Create a free API key at [console.groq.com](https://console.groq.com/)
+2. In the Netlify dashboard → **Site settings → Environment variables**, add:
+   - `GROQ_API_KEY` = your Groq API key
+3. Redeploy the site
+
+Without `GROQ_API_KEY`, the chat UI appears but requests return a friendly configuration message.
+
 ## Running Locally
 
 ```bash
