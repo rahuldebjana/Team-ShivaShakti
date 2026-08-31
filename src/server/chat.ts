@@ -1,6 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { TEMPLE_SYSTEM_PROMPT } from '@/data/temple-knowledge'
 import { generateChatReply } from '@/server/llm'
+import { getGroqApiKey, getHfToken } from '@/server/env'
 
 const MAX_MESSAGE_LENGTH = 500
 const MAX_HISTORY_MESSAGES = 10
@@ -58,8 +59,8 @@ function validateChatInput(data: unknown): ChatInput {
 export const sendChatMessage = createServerFn({ method: 'POST' })
   .validator(validateChatInput)
   .handler(async ({ data }) => {
-    const hasGroq = Boolean(process.env.GROQ_API_KEY)
-    const hasHf = Boolean(process.env.HF_TOKEN)
+    const hasGroq = Boolean(getGroqApiKey())
+    const hasHf = Boolean(getHfToken())
 
     if (!hasGroq && !hasHf) {
       throw new Error(

@@ -4,3 +4,4 @@ dist
 .tanstack
 .env
 *.local
+netlify/functions/_secrets.mjs

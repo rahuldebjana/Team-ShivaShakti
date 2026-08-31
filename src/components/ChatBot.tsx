@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { sendChatMessage, type ChatMessage } from '@/server/chat'
+import { sendChatRequest, type ChatMessage } from '@/lib/chat-api'
 
 const SUGGESTED_QUESTIONS = [
   'What are the temple timings?',
@@ -68,9 +68,7 @@ export function ChatBot() {
     setLoading(true)
 
     try {
-      const { reply } = await sendChatMessage({
-        data: { message: trimmed, history: messages },
-      })
+      const reply = await sendChatRequest(trimmed, messages)
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
