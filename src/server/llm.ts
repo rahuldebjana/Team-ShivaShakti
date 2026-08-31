@@ -42,7 +42,7 @@ async function callOpenAiCompatibleApi(
 
 /** Groq — free tier, Llama 3.1 8B. Sign up at console.groq.com */
 async function callGroq(messages: LlmMessage[]): Promise<string> {
-  const apiKey = process.env.GROQ_API_KEY
+  const apiKey = getGroqApiKey()
   if (!apiKey) return Promise.reject(new Error('GROQ_API_KEY not set'))
 
   return callOpenAiCompatibleApi(
@@ -58,7 +58,7 @@ async function callGroq(messages: LlmMessage[]): Promise<string> {
  * Easier signup than Groq: huggingface.co → Settings → Access Tokens.
  */
 async function callHuggingFace(messages: LlmMessage[]): Promise<string> {
-  const apiKey = process.env.HF_TOKEN
+  const apiKey = getHfToken()
   if (!apiKey) return Promise.reject(new Error('HF_TOKEN not set'))
 
   return callOpenAiCompatibleApi(
