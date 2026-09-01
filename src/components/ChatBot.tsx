@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { sendChatRequest, type ChatMessage } from '@/lib/chat-api'
+import { sendAgentChatRequest, type ChatMessage } from '@/lib/chat-api'
 
 const SUGGESTED_QUESTIONS = [
   'What are the temple timings?',
@@ -8,8 +8,8 @@ const SUGGESTED_QUESTIONS = [
   'Where is the temple located?',
 ]
 
-function MessageBubble({ role, content }: ChatMessage) {
-  const isUser = role === 'user'
+function MessageBubble({ message }: { message: ChatMessage }) {
+  const isUser = message.role === 'user'
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
@@ -32,10 +32,23 @@ function MessageBubble({ role, content }: ChatMessage) {
       >
         {!isUser && (
           <div className="text-xs font-semibold mb-1" style={{ color: '#8B0000', fontFamily: 'Georgia, serif' }}>
-            Temple Assistant
+            Temple Agent
           </div>
         )}
-        {content}
+        {message.content}
+        {!isUser && message.toolsUsed && message.toolsUsed.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {message.toolsUsed.map((tool) => (
+              <span
+                key={tool}
+                className="text-[10px] px-2 py-0.5 rounded-full"
+                style={{ background: '#F5E6D3', color: '#8B0000', border: '1px solid #E8D5B0' }}
+              >
+                {tool.replace(/^get_|^search_/, '').replace(/_/g, ' ')}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
@@ -46,6 +59,7 @@ export function ChatBot() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [agentStatus, setAgentStatus] = useState('')
   const [error, setError] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -55,7 +69,7 @@ export function ChatBot() {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
       inputRef.current?.focus()
     }
-  }, [open, messages, loading])
+  }, [open, messages, loading, agentStatus])
 
   const sendMessage = async (text: string) => {
     const trimmed = text.trim()
@@ -63,17 +77,20 @@ export function ChatBot() {
 
     setError('')
     setInput('')
+    setAgentStatus('Understanding your question...')
     const userMessage: ChatMessage = { role: 'user', content: trimmed }
     setMessages((prev) => [...prev, userMessage])
     setLoading(true)
 
     try {
-      const reply = await sendChatRequest(trimmed, messages)
-      setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
+      setAgentStatus('Selecting tools & gathering temple info...')
+      const { reply, toolsUsed } = await sendAgentChatRequest(trimmed, messages)
+      setMessages((prev) => [...prev, { role: 'assistant', content: reply, toolsUsed }])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
       setLoading(false)
+      setAgentStatus('')
     }
   }
 
@@ -91,7 +108,6 @@ export function ChatBot() {
 
   return (
     <>
-      {/* Chat panel */}
       {open && (
         <div
           className="chatbot-panel fixed bottom-24 right-4 z-50 flex flex-col rounded-2xl shadow-2xl overflow-hidden"
@@ -102,9 +118,8 @@ export function ChatBot() {
             background: '#FFF8F0',
           }}
           role="dialog"
-          aria-label="Temple assistant chat"
+          aria-label="Temple agent chat"
         >
-          {/* Header */}
           <div
             className="flex items-center justify-between px-4 py-3 shrink-0"
             style={{
@@ -116,10 +131,10 @@ export function ChatBot() {
               <span className="text-xl" style={{ color: '#D4A017' }}>ॐ</span>
               <div>
                 <div className="text-sm font-bold text-white" style={{ fontFamily: 'Georgia, serif' }}>
-                  Temple Assistant
+                  Temple Agent
                 </div>
                 <div className="text-xs" style={{ color: '#F0C040' }}>
-                  Ask about darshan, puja & 80G
+                  AI agent · uses tools for accurate answers
                 </div>
               </div>
             </div>
@@ -136,13 +151,12 @@ export function ChatBot() {
             </button>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
             {messages.length === 0 && (
               <div className="text-center py-4">
                 <div className="text-4xl mb-3">🙏</div>
                 <p className="text-sm mb-4" style={{ color: '#5C3D11' }}>
-                  Namaste! I can help with temple timings, rituals, donations, 80G benefits, and directions.
+                  Namaste! I&apos;m an agentic assistant — I look up official temple data before answering.
                 </p>
                 <div className="flex flex-col gap-2">
                   {SUGGESTED_QUESTIONS.map((q) => (
@@ -166,7 +180,7 @@ export function ChatBot() {
             )}
 
             {messages.map((msg, i) => (
-              <MessageBubble key={i} role={msg.role} content={msg.content} />
+              <MessageBubble key={i} message={msg} />
             ))}
 
             {loading && (
@@ -175,7 +189,10 @@ export function ChatBot() {
                   className="rounded-2xl px-4 py-3 text-sm"
                   style={{ background: '#fff', border: '1px solid #E8D5B0', color: '#5C3D11' }}
                 >
-                  <span className="chatbot-typing">Thinking</span>
+                  <div className="text-xs font-semibold mb-1" style={{ color: '#8B0000' }}>
+                    Agent working
+                  </div>
+                  <span>{agentStatus || 'Thinking'}</span>
                   <span className="chatbot-dots">...</span>
                 </div>
               </div>
@@ -194,7 +211,6 @@ export function ChatBot() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
           <form
             onSubmit={handleSubmit}
             className="shrink-0 px-3 py-3 flex gap-2 items-end"
@@ -205,7 +221,7 @@ export function ChatBot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about the temple..."
+              placeholder="Ask the temple agent..."
               rows={1}
               maxLength={500}
               disabled={loading}
@@ -230,7 +246,6 @@ export function ChatBot() {
         </div>
       )}
 
-      {/* Floating toggle button */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -241,11 +256,11 @@ export function ChatBot() {
           color: '#F0C040',
           fontFamily: 'Georgia, serif',
         }}
-        aria-label={open ? 'Close temple assistant' : 'Open temple assistant'}
+        aria-label={open ? 'Close temple agent' : 'Open temple agent'}
         aria-expanded={open}
       >
         <span className="text-lg">{open ? '✕' : 'ॐ'}</span>
-        {!open && <span className="text-sm font-semibold hidden sm:inline">Ask Us</span>}
+        {!open && <span className="text-sm font-semibold hidden sm:inline">Ask Agent</span>}
       </button>
     </>
   )

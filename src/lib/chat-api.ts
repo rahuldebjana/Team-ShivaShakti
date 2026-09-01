@@ -1,18 +1,31 @@
 export type ChatMessage = {
   role: 'user' | 'assistant'
   content: string
+  toolsUsed?: string[]
+}
+
+export type AgentChatResponse = {
+  reply: string
+  toolsUsed: string[]
+  toolLabels: string[]
 }
 
 const CHAT_API = '/.netlify/functions/chat'
 
-export async function sendChatRequest(message: string, history: ChatMessage[]): Promise<string> {
+export async function sendAgentChatRequest(
+  message: string,
+  history: ChatMessage[],
+): Promise<AgentChatResponse> {
   const response = await fetch(CHAT_API, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({
+      message,
+      history: history.map(({ role, content }) => ({ role, content })),
+    }),
   })
 
-  const data = (await response.json()) as { reply?: string; error?: string }
+  const data = (await response.json()) as AgentChatResponse & { error?: string }
 
   if (!response.ok) {
     throw new Error(data.error ?? 'Something went wrong. Please try again.')
@@ -22,5 +35,9 @@ export async function sendChatRequest(message: string, history: ChatMessage[]): 
     throw new Error('No response received. Please try again.')
   }
 
-  return data.reply
+  return {
+    reply: data.reply,
+    toolsUsed: data.toolsUsed ?? [],
+    toolLabels: data.toolLabels ?? [],
+  }
 }

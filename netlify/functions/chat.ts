@@ -1,15 +1,31 @@
 import type { Handler } from '@netlify/functions'
-import { TEMPLE_SYSTEM_PROMPT } from '../../src/data/temple-knowledge'
+import { AGENT_SYSTEM_PROMPT } from '../../src/agent/prompt'
+import { AGENT_TOOLS, executeAgentTool, TOOL_LABELS } from '../../src/agent/tools'
 import { GROQ_API_KEY, HF_TOKEN } from './_secrets.mjs'
 
 const MAX_MESSAGE_LENGTH = 500
 const MAX_HISTORY_MESSAGES = 10
+const MAX_TOOL_ROUNDS = 4
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const GROQ_MODEL = 'openai/gpt-oss-20b'
-const HF_API_URL = 'https://router.huggingface.co/v1/chat/completions'
-const HF_MODEL = 'meta-llama/Llama-3.1-8B-Instruct:fastest'
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string }
+
+type LlmMessage = {
+  role: string
+  content?: string | null
+  tool_calls?: Array<{
+    id: string
+    type: 'function'
+    function: { name: string; arguments: string }
+  }>
+  tool_call_id?: string
+}
+
+type AgentResult = {
+  reply: string
+  toolsUsed: string[]
+}
 
 function json(statusCode: number, body: unknown) {
   return {
@@ -46,61 +62,107 @@ function validateInput(data: unknown): { message: string; history: ChatMessage[]
   return { message: trimmed, history: validHistory }
 }
 
-async function callLlm(
-  apiUrl: string,
-  apiKey: string,
-  model: string,
-  messages: Array<{ role: string; content: string }>,
-): Promise<string> {
-  const response = await fetch(apiUrl, {
+function getApiKey(): string {
+  const groqKey = GROQ_API_KEY || process.env.GROQ_API_KEY
+  if (groqKey) return groqKey
+  const hfToken = HF_TOKEN || process.env.HF_TOKEN
+  if (hfToken) throw new Error('Agent tools require Groq. Please configure GROQ_API_KEY.')
+  throw new Error('The temple assistant is not configured yet.')
+}
+
+async function callAgentLlm(messages: LlmMessage[]): Promise<LlmMessage> {
+  const response = await fetch(GROQ_API_URL, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${getApiKey()}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ model, messages, max_tokens: 512, temperature: 0.7 }),
+    body: JSON.stringify({
+      model: GROQ_MODEL,
+      messages,
+      tools: AGENT_TOOLS,
+      tool_choice: 'auto',
+      max_tokens: 600,
+      temperature: 0.5,
+    }),
   })
 
   if (!response.ok) {
     const errorBody = await response.text().catch(() => '')
-    console.error('LLM API error:', response.status, errorBody)
+    console.error('Agent LLM error:', response.status, errorBody)
     throw new Error('The assistant is temporarily unavailable. Please try again later.')
   }
 
-  const result = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> }
-  const reply = result.choices?.[0]?.message?.content?.trim()
-  if (!reply) throw new Error('No response received.')
-  return reply
+  const result = (await response.json()) as { choices?: Array<{ message?: LlmMessage }> }
+  const message = result.choices?.[0]?.message
+  if (!message) throw new Error('No response received.')
+  return message
 }
 
-async function generateReply(message: string, history: ChatMessage[]): Promise<string> {
-  const messages = [
-    { role: 'system', content: TEMPLE_SYSTEM_PROMPT },
+async function runAgent(message: string, history: ChatMessage[]): Promise<AgentResult> {
+  const messages: LlmMessage[] = [
+    { role: 'system', content: AGENT_SYSTEM_PROMPT },
     ...history.map((m) => ({ role: m.role, content: m.content })),
     { role: 'user', content: message },
   ]
 
-  const groqKey = GROQ_API_KEY || process.env.GROQ_API_KEY
-  if (groqKey) {
-    try {
-      return await callLlm(GROQ_API_URL, groqKey, GROQ_MODEL, messages)
-    } catch (err) {
-      console.error('Groq failed:', err)
-      throw err instanceof Error ? err : new Error('Groq request failed')
+  const toolsUsed: string[] = []
+
+  for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
+    const assistantMessage = await callAgentLlm(messages)
+
+    if (assistantMessage.tool_calls?.length) {
+      messages.push(assistantMessage)
+
+      for (const toolCall of assistantMessage.tool_calls) {
+        const toolName = toolCall.function.name
+        toolsUsed.push(toolName)
+
+        let args: Record<string, unknown> = {}
+        try {
+          args = JSON.parse(toolCall.function.arguments || '{}') as Record<string, unknown>
+        } catch {
+          args = {}
+        }
+
+        const result = executeAgentTool(toolName, args)
+        messages.push({
+          role: 'tool',
+          tool_call_id: toolCall.id,
+          content: result,
+        })
+      }
+
+      continue
     }
+
+    const reply = assistantMessage.content?.trim()
+    if (!reply) throw new Error('No response received.')
+
+    return { reply, toolsUsed: [...new Set(toolsUsed)] }
   }
 
-  const hfToken = HF_TOKEN || process.env.HF_TOKEN
-  if (hfToken) {
-    return callLlm(HF_API_URL, hfToken, HF_MODEL, messages)
-  }
+  const finalMessage = await callAgentLlm([
+    ...messages,
+    {
+      role: 'user',
+      content: 'Please provide your final answer to the devotee based on the tool results above.',
+    },
+  ])
 
-  throw new Error('The temple assistant is not configured yet.')
+  const reply = finalMessage.content?.trim()
+  if (!reply) throw new Error('No response received.')
+
+  return { reply, toolsUsed: [...new Set(toolsUsed)] }
 }
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type' }, body: '' }
+    return {
+      statusCode: 204,
+      headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type' },
+      body: '',
+    }
   }
 
   if (event.httpMethod !== 'POST') {
@@ -110,8 +172,13 @@ export const handler: Handler = async (event) => {
   try {
     const body = event.body ? JSON.parse(event.body) : {}
     const { message, history } = validateInput(body)
-    const reply = await generateReply(message, history)
-    return json(200, { reply })
+    const { reply, toolsUsed } = await runAgent(message, history)
+
+    return json(200, {
+      reply,
+      toolsUsed,
+      toolLabels: toolsUsed.map((t) => TOOL_LABELS[t] ?? t),
+    })
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Something went wrong.'
     const status = msg.includes('not configured') ? 503 : 400
