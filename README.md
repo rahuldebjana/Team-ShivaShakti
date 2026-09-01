@@ -22,9 +22,15 @@ A beautifully designed, production-grade website for **Beteswar Shiva Mandir** (
 
 A floating **Temple Assistant** chatbot is available on all pages (powered by Llama 3.1 via Groq). Set `GROQ_API_KEY` in Netlify environment variables for production.
 
-## Temple Chatbot
+## Temple Agent (Agentic Chatbot)
 
-A floating **Temple Assistant** chatbot (bottom-right on every page) powered by [Llama 3.1 8B](https://llama.meta.com/) via the free [Groq](https://groq.com/) API. It answers questions about temple timings, rituals, 80G donations, and directions using a curated knowledge base.
+A floating **Temple Agent** on every page uses an **agentic AI loop** with **tool calling** — it looks up official temple data (timings, location, 80G, FAQs) before answering, instead of guessing.
+
+**Tools:** `get_temple_timings`, `get_temple_services`, `get_location`, `get_80g_info`, `search_faqs`, `get_contact_guidance`
+
+**Stack:** React UI → Netlify Function (`/.netlify/functions/chat`) → Groq `openai/gpt-oss-20b` with tools
+
+Set `GROQ_API_KEY` in Netlify environment variables. See setup below.
 
 ### Setup (required for production)
 
